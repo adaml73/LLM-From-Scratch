@@ -43,7 +43,7 @@ ids = tokenizer.encode(text)
 print(ids)
 tokenizer.decode(ids)
 print(tokenizer.decode(tokenizer.encode(text)))
-print(vocab)
+print(ids)
 
 #helps the llm with context, and to handle unknown words
 #[BOS] - begining of sequence
@@ -55,8 +55,17 @@ print(vocab)
 #this fails because hello is no in the vocab
 tokenizer = SimpleTokenizerV1(vocab)
 text = "Hello, do you like tea. Is this-- a test?"
-text.encode(text)
+
+for i, item in enumerate(list(vocab.items())[-5:]):
+    print(item)
 
 
+all_tokens = sorted(list(set(preprocessed)))
+all_tokens.extend(["<|endoftext|>", "<|unk|>"])
+vocab = {token:integer for integer,token in enumerate(all_tokens)}
+
+print(len(vocab.items()))
+for i, item in enumerate(list(vocab.items())[-5:]):
+    print(item)
 
 
